@@ -147,31 +147,92 @@
             text-align: center;
         }
 
-        /* --- 7. COSMIC SECTION (Hidden) --- */
-        #cosmic-trigger-section {
-            padding: 40px 0;
-            text-align: center;
+        /* --- 7. MENU & BUTTON STYLES --- */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 20px;
         }
-        .btn-cosmic {
-            background: linear-gradient(135deg, #1B2735 0%, #090A0F 100%);
+        
+        .trigger-wrapper {
+            /* This mimics the original section behavior but for inside grid */
+            text-align: center;
+            width: 100%;
+        }
+
+        .btn-trigger-base {
             color: white;
-            padding: 15px 25px;
-            border-radius: 30px;
-            border: 2px solid #e0c3fc;
+            padding: 20px;
+            border-radius: 20px;
             font-family: 'Montserrat', sans-serif;
             font-size: 1rem;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: transform 0.3s;
-            display: inline-flex; align-items: center; gap: 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex; 
+            flex-direction: column;
+            align-items: center; 
+            justify-content: center;
+            gap: 10px;
+            border: none;
+            width: 100%;
+            height: 100%;
+            min-height: 120px;
         }
-        .btn-cosmic:hover { transform: scale(1.05); }
+        .btn-trigger-base i { font-size: 1.8rem; margin-bottom: 5px; }
+        .btn-trigger-base:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.2); }
+        .btn-trigger-base:active { transform: scale(0.95); }
 
+        /* Cosmic */
+        .btn-cosmic {
+            background: linear-gradient(135deg, #1B2735 0%, #090A0F 100%);
+            border: 2px solid #e0c3fc;
+        }
+        /* Diary */
+        .btn-diary {
+            background: linear-gradient(135deg, #880e4f 0%, #c2185b 100%);
+            border: 2px solid #ff80ab;
+        }
+        /* Music */
+        .btn-music-trigger {
+            background: linear-gradient(135deg, #d81b60 0%, #ad1457 100%);
+            border: 2px solid #ff80ab;
+        }
+        /* Playful */
+        .btn-playful-trigger {
+            background: linear-gradient(135deg, #ff5252 0%, #ff1744 100%);
+            border: 2px solid #ff8a80;
+        }
+        /* Gift */
+        .btn-gift-trigger {
+            background: linear-gradient(135deg, #ffa000 0%, #ff6f00 100%);
+            border: 2px solid #ffd54f;
+        }
+        /* Gemini */
+        .btn-gemini-trigger {
+            background: linear-gradient(135deg, #6a1b9a 0%, #4a148c 100%);
+            border: 2px solid #e1bee7;
+        }
+
+        /* HIDDEN SECTIONS */
+        #cosmic-section, 
+        #diary-section,
+        #music-dedication,
+        #playful-section,
+        #surprise-gift,
+        #gemini-magic-section {
+            background-size: 20px 20px;
+            display: none; /* ALL HIDDEN BY DEFAULT */
+            margin-top: 40px;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        /* Cosmic Specifics */
         #cosmic-section {
             background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
-            color: white; padding: 80px 0;
-            text-align: center; overflow: hidden;
-            display: none; 
+            color: white; padding: 60px 0;
         }
         #star-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
         .cosmic-title {
@@ -211,31 +272,7 @@
         .flower-card h3 { font-size: 1.2rem; margin: 0; }
         .flower-card p { font-size: 0.95rem; line-height: 1.4; margin-top: 5px; }
 
-        /* --- 9. DIARY (With Trigger) --- */
-        #diary-trigger-section {
-            padding: 40px 0;
-            text-align: center;
-        }
-        .btn-diary {
-            background: linear-gradient(135deg, #880e4f 0%, #c2185b 100%);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 30px;
-            border: 2px solid #ff80ab;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(136, 14, 79, 0.3);
-            transition: transform 0.3s;
-            display: inline-flex; align-items: center; gap: 10px;
-        }
-        .btn-diary:hover { transform: scale(1.05); }
-
-        #diary-section {
-            background-size: 20px 20px;
-            padding: 60px 0;
-            display: none; /* HIDDEN BY DEFAULT */
-        }
+        /* --- 9. DIARY Styles --- */
         .paper-sheet {
             background: #fff; width: 100%; 
             padding: 30px 20px;
@@ -560,6 +597,10 @@
 
 
         /* --- MEDIA QUERIES --- */
+        @media (min-width: 480px) {
+            .menu-grid { grid-template-columns: 1fr 1fr; }
+        }
+        
         @media (min-width: 768px) {
             .section { padding: 90px 0; }
             h2 { font-size: 2.5rem; }
@@ -573,6 +614,7 @@
             .paper-sheet { transform: rotate(-2deg); padding: 60px; }
             .paper-content { font-size: 1.8rem; }
             .magic-btn { width: auto; }
+            .menu-grid { grid-template-columns: repeat(3, 1fr); max-width: 900px; }
         }
         @media (min-width: 1024px) {
             .flowers-grid { grid-template-columns: repeat(4, 1fr); }
@@ -587,8 +629,10 @@
     <div class="music-btn" id="musicBtn" onclick="toggleMusic()">
         <i class="fas fa-music"></i>
     </div>
-    <audio id="bgMusic" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    
+    <!-- BACKGROUND MUSIC -->
+    <audio id="bgMusic" loop autoplay>
+        <source src="https://files.catbox.moe/ojlbpi.mp3" type="audio/mpeg">
     </audio>
 
     <div class="hug-overlay" id="hugOverlay">
@@ -627,13 +671,59 @@
         </div>
     </section>
 
-    <section id="cosmic-trigger-section">
-        <div class="container text-center">
-            <button class="btn-cosmic" onclick="revealCosmicSection()">
-                <i class="fas fa-star" style="color:#FFD700"></i> Tap to see what the Universe saw on your Birthday <i class="fas fa-star" style="color:#FFD700"></i>
-            </button>
+    <!-- NEW: SURPRISE MENU GRID (All buttons in one place) -->
+    <section id="surprise-menu" class="section">
+        <div class="container reveal">
+            <h2 class="text-center" style="color: #c2185b; margin-bottom: 30px;">Tap to Unlock Surprises! 🎁</h2>
+            <div class="menu-grid">
+                
+                <!-- 1. Cosmic Trigger -->
+                <div id="cosmic-trigger-section" class="trigger-wrapper">
+                    <button class="btn-trigger-base btn-cosmic" onclick="revealCosmicSection()">
+                        <i class="fas fa-star" style="color:#FFD700"></i> The Universe on Your B'day
+                    </button>
+                </div>
+
+                <!-- 2. Gift Trigger -->
+                <div id="gift-trigger-section" class="trigger-wrapper">
+                    <button class="btn-trigger-base btn-gift-trigger" onclick="revealGiftSection()">
+                        <i class="fas fa-gift"></i> A Surprise for You!
+                    </button>
+                </div>
+
+                <!-- 3. Playful Trigger -->
+                <div id="playful-trigger-section" class="trigger-wrapper">
+                    <button class="btn-trigger-base btn-playful-trigger" onclick="revealPlayfulSection()">
+                        <i class="fas fa-cookie-bite"></i> My Strawberry Shortcake
+                    </button>
+                </div>
+
+                <!-- 4. Music Trigger -->
+                <div id="music-trigger-section" class="trigger-wrapper">
+                    <button class="btn-trigger-base btn-music-trigger" onclick="revealMusicSection()">
+                        <i class="fas fa-music"></i> Melody of Heart
+                    </button>
+                </div>
+
+                <!-- 5. Diary Trigger -->
+                <div id="diary-trigger-section" class="trigger-wrapper">
+                    <button class="btn-trigger-base btn-diary" onclick="revealDiarySection()">
+                        <i class="fas fa-envelope"></i> Read Personal Note
+                    </button>
+                </div>
+
+                <!-- 6. Gemini Trigger -->
+                <div id="gemini-trigger-section" class="trigger-wrapper">
+                    <button class="btn-trigger-base btn-gemini-trigger" onclick="revealGeminiSection()">
+                        <i class="fas fa-sparkles"></i> Cosmic AI Whispers
+                    </button>
+                </div>
+
+            </div>
         </div>
     </section>
+
+    <!-- HIDDEN SECTIONS (They appear below when unlocked) -->
 
     <section id="cosmic-section" class="reveal">
         <canvas id="star-canvas"></canvas>
@@ -649,13 +739,13 @@
                 Like this vast galaxy, your spirit is beautiful and limitless. You are a gift to this universe.
             </p>
             <div style="background: rgba(255,255,255,0.15); padding: 10px 20px; border-radius: 50px; display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; font-size: 0.9rem;">
-                <i class="fas fa-star" style="color: #ffd700;"></i> ID: SONA-12-01-2005
+                <i class="fas fa-star" style="color: #ffd700;"></i> ID: SONA-13-01-2005
             </div>
         </div>
     </section>
 
-    <section id="surprise-gift" class="section" style="background: #fff0f5;">
-        <div class="container reveal text-center">
+    <section id="surprise-gift" class="reveal" style="background: #fff0f5;">
+        <div class="container text-center">
             <h2 style="color: #c2185b;">A Surprise for You!</h2>
             <p style="margin-bottom: 20px;">Tap the box to open your gift.</p>
             
@@ -669,14 +759,14 @@
                 <div class="gift-content">
                     <h3 style="color: #d81b60; font-family: 'Great Vibes', cursive; font-size: 2rem;">Lifetime Happiness</h3>
                     <p style="font-size: 0.9rem;">Coupon Valid Forever!</p>
-                    <p style="font-size: 0.8rem; margin-top: 5px; color: #888;">No expiry date.</p>
+                    <p style="font-size: 0.8rem; margin-top: 5px; color: #888;">Coupon code #BEWITHASHISH_fr.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section" id="playful-section">
-        <div class="container text-center reveal">
+    <section id="playful-section" class="reveal">
+        <div class="container text-center">
             <h2>My Strawberry Shortcake 🍓</h2>
             <p>Tap the toaster for a surprise!</p>
             
@@ -696,39 +786,71 @@
         </div>
     </section>
 
-    <section id="music-dedication" class="section">
-        <div class="container reveal">
+    <section id="music-dedication" class="reveal">
+        <div class="container">
             <h2 class="text-center" style="margin-bottom: 30px;">Melody of Heart 🎵</h2>
             <div class="glass-card" style="padding: 20px; max-width: 500px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center;">
                 <p style="margin-bottom: 20px; font-style: italic; color: #5d4037;">"A song that feels like you..."</p>
                 
-                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/18Sgw9PWiIMeqPaZZ3U7zb?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                <!-- DEDICATION POSTER -->
+                <div style="width: 200px; height: 200px; border-radius: 50%; overflow: hidden; margin-bottom: 15px; border: 5px solid #ff80ab; box-shadow: 0 5px 15px rgba(0,0,0,0.2); position: relative;">
+                     <img id="posterImage" src="https://i.ibb.co/n87Z3wpT/Screenshot-2026-01-12-162523.png" alt="Song Dedication" style="width: 100%; height: 100%; object-fit: cover;">
+                     <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-play" style="color: white; font-size: 2rem; opacity: 0.8;"></i>
+                     </div>
+                </div>
+                
+                <h3 style="color: #c2185b; font-family: 'Playfair Display', serif; margin-bottom: 10px;">Goriya Chand Ke Anjoriya</h3>
+                
+                <!-- DEDICATED SONG PLAYER -->
+                <audio controls style="width: 100%; margin-top: 10px; margin-bottom: 10px;">
+                    <source src="https://files.catbox.moe/d6njwi.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+
+                <p style="font-weight: bold; color: #d81b60; font-family: 'Dancing Script', cursive; font-size: 1.3rem;">
+                    Dedicated to you and your Beauty.
+                </p>
                 
                 <div style="margin-top: 15px; font-size: 0.9rem; color: #888;">
-                    <i class="fas fa-headphones-alt"></i> Goriya Chand Ke Anjoriya - Manoj Tiwari
+                    <i class="fas fa-headphones-alt"></i> Your beloved friend - Ashish
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="diary-trigger-section">
-        <div class="container text-center">
-            <button class="btn-diary" onclick="revealDiarySection()">
-                <i class="fas fa-envelope"></i> Read Personal Note <i class="fas fa-envelope"></i>
-            </button>
-        </div>
-    </section>
-
-    <section id="diary-section">
+    <section id="diary-section" class="reveal">
         <div class="container">
             <h2 class="text-center" style="margin-bottom: 30px; font-family: 'Great Vibes', cursive; font-size: 3rem; color: #c2185b;">A Note for You</h2>
-            <div class="paper-sheet reveal">
+            <div class="paper-sheet">
                 <div class="paper-content">
                     <span id="typewriter-text"></span><span style="display: inline-block; width: 2px; height: 1.2rem; background: #c2185b; animation: blink 1s infinite;"></span>
                 </div>
             </div>
         </div>
     </section>
+
+    <section id="gemini-magic-section" class="reveal" style="background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);">
+        <div class="container text-center">
+            <h2 style="color: #6a1b9a;">Cosmic AI Whispers ✨</h2>
+            <p style="margin-bottom: 25px; font-size: 1rem; color: #5d4037;">
+                Tap below for a magical wish from the Universe.
+            </p>
+            
+            <button class="magic-btn" onclick="generateMagicWish()" style="background: linear-gradient(45deg, #7b1fa2, #ba68c8); color: white; border: none; border-radius: 50px; font-size: 1.1rem; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 5px 15px rgba(123, 31, 162, 0.3);">
+                <i class="fas fa-magic"></i> Generate Magical Wish
+            </button>
+            
+            <div class="loading-spinner" id="ai-loader" style="display:none; width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #7b1fa2; border-radius: 50%; animation: spin 1s linear infinite; margin: 20px auto;"></div>
+            
+            <div class="ai-response-card glass-card" id="ai-card" style="margin-top: 30px; padding: 25px; display: none;">
+                <p class="ai-text" id="ai-wish-text" style="font-family: 'Dancing Script', cursive; font-size: 1.6rem; color: #4a148c;"></p>
+                <p style="font-size: 0.8rem; margin-top: 10px; color: #7b1fa2;">- Gemini AI 🌌</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- END OF SURPRISE SECTIONS -->
 
     <section id="letter-book-section" class="section" style="background: linear-gradient(180deg, #fff0f5 0%, #ffebee 100%);">
         <div class="container reveal text-center">
@@ -741,7 +863,7 @@
                     <span class="page-hint" style="color:#d81b60">End of Letter</span>
                 </div>
                 <div class="book-page" id="page8" onclick="flipPage(this)">
-                    <p class="page-text">"Do visit Prabhu Jagannath Temple. Unka aashirwad hamesha aapke saath rahe."</p>
+                    <p class="page-text">"Do visit Prabhu Jagannath Temple. Unka aashirwad hamesha aapke saath rahe जय जगनाथ !!!."</p>
                     <span class="page-hint">Tap to finish ></span>
                 </div>
                 <div class="book-page" id="page7" onclick="flipPage(this)">
@@ -757,11 +879,11 @@
                     <span class="page-hint">Tap for more ></span>
                 </div>
                 <div class="book-page" id="page4" onclick="flipPage(this)">
-                    <p class="page-text">"Aap hai as a friend hi lekin aap hai... As of now aap mujhe bhai bol sakte hain, mujhe koi problem nahi behen (bas boliyega mat haha!). Truth is, you are the sweetest girl I have ever met."</p>
+                    <p class="page-text">"mai hu aapke liy as a friend hi lekin aap As of now aap mujhe Bhai bol sakte hain, mujhe koi problem nahi behen (bas boliyega mat haha!). Truth is, you are the sweetest girl I have ever met."</p>
                     <span class="page-hint">Tap for more ></span>
                 </div>
                 <div class="book-page" id="page3" onclick="flipPage(this)">
-                    <p class="page-text">"Is baar birthday par I wish aapka career bohot acha ho. I hope maine sabse special aapko feel karwaya ho... par sach kahun? Karwane se kuch nahi hota, aap 'special' hain hi!"</p>
+                    <p class="page-text">"Is baar birthday par I wish aapka career me bhut exclenninces hasil karo. I hope maine sabse special aapko feel karwaya ho... par sach kahun? Karwane se kuch nahi hota, aap 'special' hain hi!"</p>
                     <span class="page-hint">Tap for more ></span>
                 </div>
                 <div class="book-page" id="page2" onclick="flipPage(this)">
@@ -827,28 +949,8 @@
                 </div>
                 <div class="reason-card glass-card reveal" style="display:flex; align-items:center; border-left: 5px solid #ff80ab;">
                     <div class="reason-number" style="background: #ff80ab;">3</div>
-                    <div class="reason-text">You inspire me to be better.</div>
+                    <div class="reason-text">You inspire me to be better and have some faith in महिला प्रजाति .</div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="gemini-magic-section" class="section" style="background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);">
-        <div class="container reveal text-center">
-            <h2 style="color: #6a1b9a;">Cosmic AI Whispers ✨</h2>
-            <p style="margin-bottom: 25px; font-size: 1rem; color: #5d4037;">
-                Tap below for a magical wish from the Universe.
-            </p>
-            
-            <button class="magic-btn" onclick="generateMagicWish()" style="background: linear-gradient(45deg, #7b1fa2, #ba68c8); color: white; border: none; border-radius: 50px; font-size: 1.1rem; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 5px 15px rgba(123, 31, 162, 0.3);">
-                <i class="fas fa-magic"></i> Generate Magical Wish
-            </button>
-            
-            <div class="loading-spinner" id="ai-loader" style="display:none; width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #7b1fa2; border-radius: 50%; animation: spin 1s linear infinite; margin: 20px auto;"></div>
-            
-            <div class="ai-response-card glass-card" id="ai-card" style="margin-top: 30px; padding: 25px; display: none;">
-                <p class="ai-text" id="ai-wish-text" style="font-family: 'Dancing Script', cursive; font-size: 1.6rem; color: #4a148c;"></p>
-                <p style="font-size: 0.8rem; margin-top: 10px; color: #7b1fa2;">- Gemini AI 🌌</p>
             </div>
         </div>
     </section>
@@ -875,6 +977,7 @@
                 <p class="personal-message">
                     "Sona, may this year bring you as much happiness as you give to everyone around you. Keep shining, keep smiling."
                 </p>
+                
                 <div style="margin-top: 30px; font-size: 1.1rem; color: #8d6e63;">
                     <i class="fas fa-heart" style="color: #c2185b;"></i><br>
                     <strong>Ashish Maurya</strong>
@@ -884,17 +987,17 @@
     </section>
 
     <footer style="background: #3e2723; color: #d7ccc8; padding: 30px 0; text-align: center; font-size: 0.9rem;">
-        <p>Crafted with love and stardust. © 2026</p>
+        <p>Crafted for just Sona. © 2026</p>
     </footer>
 
     <script>
         // --- CONFIGURATION ---
-        const birthdayDate = new Date("January 12, 2026 00:00:00").getTime();
+        const birthdayDate = new Date("January 13, 2026 00:00:00").getTime();
         
         // --- FLOATING ELEMENTS ---
         function createFloatingElements() {
             const container = document.getElementById('floating-container');
-            const elements = ['🌸', '🌹', '✨', '💖', 'S', 'O', 'N', 'A']; 
+            const elements = ['🌸', '🌹', '✨', '💖', 'S', 'O', 'N', 'A','P','f','I','love','you','Happy Birthday Sona','🍃','🌙','🪞','🪷','✨','📜','🦋','🤍','🎀','🧸','🌷','🍭']; 
             const count = window.innerWidth < 768 ? 15 : 30; 
 
             for (let i = 0; i < count; i++) {
@@ -910,7 +1013,7 @@
         }
         createFloatingElements();
 
-        // --- NEW: MUSIC PLAYER ---
+        // --- NEW: MUSIC PLAYER & AUTOPLAY LOGIC ---
         function toggleMusic() {
             const audio = document.getElementById('bgMusic');
             const btn = document.getElementById('musicBtn');
@@ -924,6 +1027,19 @@
                 btn.classList.remove('playing');
             }
         }
+        
+        // Auto-play workaround for browsers that block instant audio
+        document.body.addEventListener('click', function() {
+            const audio = document.getElementById('bgMusic');
+            const btn = document.getElementById('musicBtn');
+            // If music hasn't started yet, play it on the first click
+            if(audio.paused) {
+                audio.play().then(() => {
+                    btn.innerHTML = '<i class="fas fa-pause"></i>';
+                    btn.classList.add('playing');
+                }).catch(e => console.log("Autoplay prevented"));
+            }
+        }, { once: true });
 
         // --- NEW: SURPRISE GIFT ---
         function openGift() {
@@ -968,30 +1084,61 @@
             }
         }
 
-        // --- NEW: REVEAL COSMIC SECTION ---
+        // --- NEW: REVEAL FUNCTIONS ---
         function revealCosmicSection() {
             const btnSection = document.getElementById('cosmic-trigger-section');
-            const cosmicSection = document.getElementById('cosmic-section');
+            const section = document.getElementById('cosmic-section');
             btnSection.style.display = 'none';
-            cosmicSection.style.display = 'block';
+            section.style.display = 'block';
             initStarField();
-            cosmicSection.scrollIntoView({ behavior: 'smooth' });
+            section.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // --- NEW: REVEAL DIARY SECTION ---
         function revealDiarySection() {
             const btnSection = document.getElementById('diary-trigger-section');
-            const diarySection = document.getElementById('diary-section');
+            const section = document.getElementById('diary-section');
             btnSection.style.display = 'none';
-            diarySection.style.display = 'block';
-            diarySection.scrollIntoView({ behavior: 'smooth' });
+            section.style.display = 'block';
+            section.scrollIntoView({ behavior: 'smooth' });
             
-            // Manually trigger typeWriter if not already typed
             if(!hasTyped) {
                 hasTyped = true;
                 setTimeout(typeWriter, 500);
             }
         }
+
+        function revealMusicSection() {
+            const btnSection = document.getElementById('music-trigger-section');
+            const section = document.getElementById('music-dedication');
+            btnSection.style.display = 'none';
+            section.style.display = 'block';
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function revealPlayfulSection() {
+            const btnSection = document.getElementById('playful-trigger-section');
+            const section = document.getElementById('playful-section');
+            btnSection.style.display = 'none';
+            section.style.display = 'block';
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function revealGiftSection() {
+            const btnSection = document.getElementById('gift-trigger-section');
+            const section = document.getElementById('surprise-gift');
+            btnSection.style.display = 'none';
+            section.style.display = 'block';
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function revealGeminiSection() {
+            const btnSection = document.getElementById('gemini-trigger-section');
+            const section = document.getElementById('gemini-magic-section');
+            btnSection.style.display = 'none';
+            section.style.display = 'block';
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+
 
         // --- NEW: MAGIC TOUCH TRAIL ---
         document.addEventListener('mousemove', function(e) { createHeart(e.clientX, e.clientY); });
@@ -1012,7 +1159,7 @@
         }
 
         // --- TYPEWRITER ---
-        const diaryText = "Dear Sona,\n\nOn this special day, I just want to remind you how incredible you are. Your kindness touches hearts. \n\nHappy Birthday! \n\n- Ashish";
+        const diaryText = "Dear Sona,\n\nOn this special day, I just want to remind you thanku so much ki aapne mera us time me sath diya jb mujhe bahut need thi kisi se apni fellings share karne ki kuch batte karne ki thanku so musch sona ,You are really A gold everyone cant be find the purity of yours . \n\nHappy Birthday! \n\n- Ashish";
         const typeWriterElement = document.getElementById('typewriter-text');
         let i = 0;
         let hasTyped = false;
